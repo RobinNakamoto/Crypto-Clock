@@ -1,7 +1,7 @@
 const priceElement = document.getElementById('price');
 
 // Customizable settings
-const textSize = '10em'; // You can change this to any size you prefer
+const textSize = '5em'; // You can change this to any size you prefer
 
 let lastPrice = null;
 
