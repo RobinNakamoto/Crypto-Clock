@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTC/FDUSD Price Tracker</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    #price {
+      font-size: 5em; /* Default size */
+    }
+    #preferences {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="price">Loading...</div>
+  <div id="preferences">
+    <form id="preferences-form">
+      <label>
+        Text Size:
+        <input type="text" id="text-size" value="5em">
+      </label>
+      <label>
+        Show Decimals:
+        <input type="checkbox" id="show-decimals">
+      </label>
+      <button type="submit">Save Preferences</button>
+    </form>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
