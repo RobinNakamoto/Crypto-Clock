@@ -1,8 +1,7 @@
 const priceElement = document.getElementById('price');
 
 // Customizable settings
-const textSize = '50em'; // You can change this to any size you prefer
-const showDecimals = true; // Change to true if you want to show decimals
+const textSize = '10em'; // You can change this to any size you prefer
 
 let lastPrice = null;
 
