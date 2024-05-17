@@ -1,29 +1,18 @@
 const priceElement = document.getElementById('price');
-const preferencesForm = document.getElementById('preferences-form');
-const textSizeInput = document.getElementById('text-size');
-const showDecimalsInput = document.getElementById('show-decimals');
+
+// Customizable settings
+const textSize = '50em'; // You can change this to any size you prefer
+const showDecimals = true; // Change to true if you want to show decimals
 
 let lastPrice = null;
 
-// Load preferences from local storage
-const preferences = {
-  textSize: localStorage.getItem('textSize') || '5em',
-  showDecimals: localStorage.getItem('showDecimals') === 'true'
-};
-
-// Apply preferences to UI
-textSizeInput.value = preferences.textSize;
-showDecimalsInput.checked = preferences.showDecimals;
-priceElement.style.fontSize = preferences.textSize;
-
-// Fetch and update price
 async function fetchPrice() {
   try {
-    const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCFDUSD');
+    const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=SOLFDUSD');
     const data = await response.json();
     let price = parseFloat(data.price);
 
-    if (!preferences.showDecimals) {
+    if (!showDecimals) {
       price = Math.floor(price);
     }
 
@@ -33,11 +22,11 @@ async function fetchPrice() {
     // Update the color based on price movement
     if (lastPrice !== null) {
       if (price > lastPrice) {
-        priceElement.style.color = 'green';
+        priceElement.style.color = 'rgb(69, 151, 130)'; // Custom green color
       } else if (price < lastPrice) {
-        priceElement.style.color = 'red';
+        priceElement.style.color = 'rgb(223, 72, 76)'; // Custom red color
       } else {
-        priceElement.style.color = 'white';
+        priceElement.style.color = 'rgb(69, 151, 130)'; // Custom green color
       }
     }
 
@@ -52,19 +41,7 @@ async function fetchPrice() {
 
 // Initial fetch and interval setup
 fetchPrice();
-setInterval(fetchPrice, 500); // Fetch price every 500 milliseconds
+setInterval(fetchPrice, 200); // Fetch price every 200 milliseconds
 
-// Handle preferences form submission
-preferencesForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  preferences.textSize = textSizeInput.value;
-  preferences.showDecimals = showDecimalsInput.checked;
-
-  // Save preferences to local storage
-  localStorage.setItem('textSize', preferences.textSize);
-  localStorage.setItem('showDecimals', preferences.showDecimals);
-
-  // Apply preferences
-  priceElement.style.fontSize = preferences.textSize;
-  fetchPrice();
-});
+// Apply the customizable text size
+priceElement.style.fontSize = textSize;
