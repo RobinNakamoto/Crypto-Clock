@@ -3,25 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto Clock</title>
+  <title>BTC Clock</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/BTC-price-clock/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/BTC-price-clock/icons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/BTC-price-clock/icons/android-chrome-512x512.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/BTC-price-clock/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/BTC-price-clock/icons/favicon-16x16.png">
+  <link rel="manifest" href="/BTC-price-clock/manifest.json">
+  <link rel="mask-icon" href="/BTC-price-clock/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/BTC-price-clock/icons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/BTC-price-clock/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
     body {
-      flex-direction: column;
+      margin: 0;
+      background-color: black;
+      font-family: 'Roboto', Arial, sans-serif;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: black;
-      font-family: Arial, sans-serif;
+      overflow: hidden;
+      flex-direction: column;
+      text-align: center;
     }
     #price {
-      font-size: 5em; /* Default size */
+      font-size: 32vw;
+      margin: 0;
+      color: #45C482;
     }
-  
+    #castButton {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5em;
+      color: white;
+      background-color: black;
+      border: 2px solid white;
+      padding: 10px;
+      cursor: pointer;
+    }
   </style>
+  <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 </head>
 <body>
   <div id="price">Loading...</div>
-  </div>
+  <button id="castButton">Cast</button>
   <script src="renderer.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/BTC-price-clock/service-worker.js')
+        .then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, error => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
